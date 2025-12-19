@@ -34,7 +34,43 @@ curl -X PUT "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/users/
 curl -X DELETE "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/users/1"
 
 
-# ##################### DB Observation Via SQLite Web
-# - install https://github.com/coleifer/sqlite-web
-# - pip install sqlite-web
-# - sqlite_web students.db
+
+#############################
+# API Observation Via CURL
+#############################
+
+# A. Get All User Activities
+curl -X GET "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/activities"
+
+
+# B. Create / Save User Activity
+curl -X POST "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/activities" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": 1,
+    "steps": 7500,
+    "water_intake": 2.5,
+    "calories_burned": 420
+  }'
+
+
+# C. Update User Activity
+curl -X PUT "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/activities/1" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": 1,
+    "steps": 9000,
+    "water_intake": 3.0,
+    "calories_burned": 500
+  }'
+
+
+# D. Delete User Activity
+curl -X DELETE "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/activities/1"
+
+
+#############################
+# DB Observation Via SQLite Web
+#############################
+# pip install sqlite-web
+# sqlite_web health_tracker.db
