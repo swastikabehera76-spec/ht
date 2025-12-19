@@ -36,7 +36,7 @@ curl -X DELETE "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/use
 
 
 #############################
-# API Observation Via CURL
+# Activities
 #############################
 
 # A. Get All User Activities
@@ -69,8 +69,40 @@ curl -X PUT "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/activi
 curl -X DELETE "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/activities/1"
 
 
-#############################
-# DB Observation Via SQLite Web
-#############################
-# pip install sqlite-web
-# sqlite_web health_tracker.db
+# Medical
+##################### API Observation Via Codespace URL
+##################### API Observation Via Hoppscotch
+##################### API Observation Via CURL
+
+# A. Get All Medical Records
+curl -X GET "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/medical"
+
+
+# B. Create Medical Record
+curl -X POST "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/medical" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": 1,
+    "disease": "Diabetes",
+    "genetic_disease": "Yes",
+    "allergies":"no",
+    "notes": "Family history present"
+  
+  }'
+
+
+# C. Update Medical Record
+curl -X PUT "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/medical/1" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": 1,
+    "disease": "Diabetes",
+    "genetic_disease": "No",
+    "allergies":"no",
+    "notes": "Family history present"
+  }'
+
+
+# D. Delete Medical Record
+curl -X DELETE "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/medical/1"
+

@@ -36,6 +36,19 @@ CREATE TABLE IF NOT EXISTS user_activity (
 )
 """)
     
+    conn.execute("""
+    CREATE TABLE IF NOT EXISTS medical_info (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        disease TEXT,
+        genetic_disease TEXT,
+        allergies TEXT,
+        created_at TEXT,
+        updated_at TEXT
+    )
+""")
+
+    
     conn.commit()
     conn.close()
     print("✓ Database initialized")
