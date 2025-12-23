@@ -28,9 +28,6 @@ def update_user(handler, user_id):
     updated = service_update(user_id, data)
     return send_json(handler, 200, updated) if updated else send_404(handler)
 
-# def delete_user(handler, user_id):
-#     deleted = service_delete(user_id)
-#     return send_json(handler, 200, {"deleted": True}) if deleted else send_404(handler)
 def delete_user(handler):
     user_id = int(handler.path.split("/")[-1])
     service_delete(user_id)

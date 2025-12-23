@@ -7,7 +7,7 @@ from core.middleware import add_cors_headers
 from core.responses import send_404
 
 # -------- USER controllers --------
-from controllers.users import (
+from controllers.user import (
     get_all_users,
     get_user,
     create_user,
@@ -34,15 +34,12 @@ from controllers.medical import (
 )
 
 # -------- FRONTEND SPA ROUTES --------
-# Only SPA shell routes — NOT API routes
 FRONTEND_ROUTES = {
-    "/",
-    "/home"
-    "/users"
-    "/activities"
+    "/", "/home",
+    "/users",
+    "/activity",
     "/medical"
 }
-
 
 class Router(BaseHTTPRequestHandler):
 
@@ -57,39 +54,38 @@ class Router(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
 
-        # ===== FRONTEND (SPA SHELL) =====
+        # ===== FRONTEND (SPA) =====
         if path in FRONTEND_ROUTES:
-            return serve_static(self, "frontend/index.html")
+            return serve_static(self, "frontend/pages/index.html")
 
-        # Serve static assets (js, css, html fragments)
         if path.startswith("/frontend/"):
             return serve_static(self, path.lstrip("/"))
 
         # ===== USERS API =====
-        if path == "/users":
+        if path == "/api/users":
             return get_all_users(self)
 
-        if path.startswith("/users/"):
+        if path.startswith("/api/users/"):
             try:
                 return get_user(self, int(path.split("/")[-1]))
             except ValueError:
                 return send_404(self)
 
         # ===== ACTIVITY API =====
-        if path == "/activity":
+        if path == "/api/activity":
             return get_all_activities(self)
 
-        if path.startswith("/activity/"):
+        if path.startswith("/api/activity/"):
             try:
                 return get_activity(self, int(path.split("/")[-1]))
             except ValueError:
                 return send_404(self)
 
         # ===== MEDICAL API =====
-        if path == "/medical":
+        if path == "/api/medical":
             return get_all_medical(self)
 
-        if path.startswith("/medical/"):
+        if path.startswith("/api/medical/"):
             try:
                 return get_medical(self, int(path.split("/")[-1]))
             except ValueError:
@@ -100,13 +96,13 @@ class Router(BaseHTTPRequestHandler):
     # ---------------- POST ----------------
     def do_POST(self):
 
-        if self.path == "/users":
+        if self.path == "/api/users":
             return create_user(self)
 
-        if self.path == "/activity":
+        if self.path == "/api/activity":
             return create_activity(self)
 
-        if self.path == "/medical":
+        if self.path == "/api/medical":
             return create_medical(self)
 
         return send_404(self)
@@ -114,13 +110,13 @@ class Router(BaseHTTPRequestHandler):
     # ---------------- PUT ----------------
     def do_PUT(self):
 
-        if self.path.startswith("/users/"):
+        if self.path.startswith("/api/users/"):
             return update_user(self, int(self.path.split("/")[-1]))
 
-        if self.path.startswith("/activity/"):
+        if self.path.startswith("/api/activity/"):
             return update_activity(self, int(self.path.split("/")[-1]))
 
-        if self.path.startswith("/medical/"):
+        if self.path.startswith("/api/medical/"):
             return update_medical(self, int(self.path.split("/")[-1]))
 
         return send_404(self)
@@ -128,13 +124,13 @@ class Router(BaseHTTPRequestHandler):
     # ---------------- DELETE ----------------
     def do_DELETE(self):
 
-        if self.path.startswith("/users/"):
-            return delete_user(self, int(self.path.split("/")[-1]))
+        if self.path.startswith("/api/users/"):
+            return delete_user(self)
 
-        if self.path.startswith("/activity/"):
+        if self.path.startswith("/api/activity/"):
             return delete_activity(self, int(self.path.split("/")[-1]))
 
-        if self.path.startswith("/medical/"):
+        if self.path.startswith("/api/medical/"):
             return delete_medical(self, int(self.path.split("/")[-1]))
 
         return send_404(self)

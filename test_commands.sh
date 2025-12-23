@@ -1,50 +1,45 @@
-##################### API Observation Via Codespace URL
-##################### API Observation Via Hopscotch
-##################### API Observation Via CURL
+# API Observation Via Codespace URL
+# API Observation Via Hopscotch
+# API Observation Via CURL
 
-# A. Get All users
-curl -X GET "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/users"
-# B. Get One user
+# A. Get User Details
+curl -X GET "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/users"
 
-curl -X GET "http://localhost:8000/api/students/1"
-
-# C. Create user
-curl -X POST "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/users" \
+# B. Create/Save User Details
+curl -X POST "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/users" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Alice Johnson",
-    "age": 25,
-    "gender":"female",
-    "height": 170,
-    "weight": 52
+    "name": "Aayusmita Patro",
+    "age": 20,
+    "height": 160,
+    "weight": 60,
+    "gender": "Female"
   }'
 
-# D. Update user
-curl -X PUT "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/users/1" \
+# # C. Update User Details
+
+curl -X PUT "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/users/1" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Alice Johnson",
-    "age": 25,
-    "gender":"female",
-    "height": 180,
-    "weight": 52
+    "name": "Aayusmita Updated",
+    "age": 20,
+    "height": 160,
+    "weight": 58,
+    "gender": "Female"
   }'
 
-# # E. Delete user
-curl -X DELETE "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/users/1"
+
+# # D. Delete User Details
+curl -X DELETE "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/users/1"
 
 
-
-#############################
-# Activities
-#############################
 
 # A. Get All User Activities
-curl -X GET "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/activities"
+curl -X GET "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/activities"
 
 
-# B. Create / Save User Activity
-curl -X POST "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/activities" \
+# # B. Create / Save User Activity
+curl -X POST "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/activities" \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 1,
@@ -54,8 +49,8 @@ curl -X POST "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/activ
   }'
 
 
-# C. Update User Activity
-curl -X PUT "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/activities/1" \
+# # C. Update User Activity
+curl -X PUT "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/activities/1" \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 1,
@@ -65,44 +60,40 @@ curl -X PUT "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/activi
   }'
 
 
-# D. Delete User Activity
-curl -X DELETE "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/activities/1"
-
-
-# Medical
-##################### API Observation Via Codespace URL
-##################### API Observation Via Hoppscotch
-##################### API Observation Via CURL
+# # D. Delete User Activity
+curl -X DELETE "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/activities/1"
 
 # A. Get All Medical Records
-curl -X GET "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/medical"
+curl -X GET "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/medical"
 
 
 # B. Create Medical Record
-curl -X POST "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/medical" \
+curl -X POST "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/medical" \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 1,
     "disease": "Diabetes",
-    "genetic_disease": "Yes",
-    "allergies":"no",
+    "disease_type": "Chronic",
+    "genetic": "Yes",
     "notes": "Family history present"
-  
   }'
-
-
 # C. Update Medical Record
-curl -X PUT "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/medical/1" \
+curl -X PUT "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/medical/2" \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 1,
     "disease": "Diabetes",
-    "genetic_disease": "No",
-    "allergies":"no",
-    "notes": "Family history present"
+    "disease_type": "Chronic",
+    "genetic": "Yes",
+    "notes": "Updated notes"
   }'
 
 
 # D. Delete Medical Record
-curl -X DELETE "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/medical/1"
+curl -X DELETE "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/medical/2"
 
+
+# # DB Observation Via SQLite Web
+# # - install https://github.com/coleifer/sqlite-web
+# # - pip install sqlite-web
+# # - sqlite_web health_tracker.db

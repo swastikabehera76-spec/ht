@@ -1,6 +1,6 @@
 import { initUserController } from "../controllers/UserController.js";
-// import { initActivitiesController } from "../controllers/ActivitiesController.js";
-// import { initMedicalController } from "../controllers/MedicalController.js";
+import { initActivitiesController } from "../controllers/ActivitiesController.js";
+import { initMedicalController } from "../controllers/MedicalController.js";
 
 // Load HTML into #app
 async function loadView(path) {
@@ -22,7 +22,7 @@ export async function router() {
     initUserController();
   }
 
-  else if (path === "/activity") {
+  else if (path === "/activities") {
     await loadView("/frontend/pages/activities.html");
     initActivitiesController();
   }
@@ -50,3 +50,8 @@ export function initRouterEvents() {
 
   window.addEventListener("popstate", router);
 }
+
+
+
+
+
