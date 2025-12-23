@@ -1,6 +1,7 @@
 import { initUserController } from "../controllers/UserController.js";
 import { initActivitiesController } from "../controllers/ActivitiesController.js";
 import { initMedicalController } from "../controllers/MedicalController.js";
+// import { initMedicalController } from "../controllers/MedicalController.js";
 
 // Load HTML into #app
 async function loadView(path) {
