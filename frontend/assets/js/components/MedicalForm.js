@@ -7,3 +7,4 @@ export function fillMedicalForm(data) {
   $("medication").value = data.medication;
   $("date").value = data.date;
 }
+
