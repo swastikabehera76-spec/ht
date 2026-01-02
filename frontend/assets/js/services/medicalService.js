@@ -22,3 +22,4 @@ export const apiUpdate = (id, data) =>
 
 export const apiDelete = id =>
   fetch(`${API_URL}/${id}`, { method: "DELETE" });
+
