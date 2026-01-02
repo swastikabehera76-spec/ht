@@ -1,58 +1,100 @@
-import * as api from "../services/medicalService.js";
-import { showAlert } from "../components/Alert.js";
+import {
+  apiGetAll,
+  apiGetOne,
+  apiCreate,
+  apiUpdate,
+  apiDelete
+} from "../services/medicalService.js";
+
 import { renderMedicalTable } from "../components/MedicalTable.js";
-import { resetMedicalForm, fillMedicalForm } from "../components/MedicalForm.js";
-import { setState, getState } from "../state/store.js";
+import {
+  fillMedicalForm,
+  resetMedicalForm
+} from "../components/MedicalForm.js";
+
 import { $ } from "../utils/dom.js";
+import { getState, setState } from "../state/store.js";
+import { showAlert } from "../components/Alert.js";
 
 export function initMedicalController() {
+  const form = $("medicalForm");
+  const cancelBtn = $("cancelBtn");
+
+  if (!form || !cancelBtn) return;
+
   loadMedical();
 
-  $("medicalForm").onsubmit = async e => {
+  form.onsubmit = async (e) => {
     e.preventDefault();
 
     const data = {
-      condition: $("condition").value,
-      medication: $("medication").value,
-      date: $("date").value
+      user_id: $("user_id").value,
+      disease: $("disease").value,
+      genetic_disease: $("genetic_disease").value,
+      allergies: $("allergies").value
     };
 
     const { editingId } = getState();
-    editingId
-      ? await api.apiUpdate(editingId, data)
-      : await api.apiCreate(data);
 
-    showAlert("Saved");
-    resetMedicalForm();
+    if (editingId) {
+      await updateMedical(editingId, data);
+    } else {
+      await createMedical(data);
+    }
+  };
+
+  cancelBtn.onclick = () => {
     setState({ editingId: null });
-    loadMedical();
+    resetMedicalForm();
   };
 }
 
 async function loadMedical() {
-    const spinner = $("loadingSpinner");
+  const spinner = $("loadingSpinner");
   const table = $("medicalTableContainer");
 
-  if (spinner) spinner.style.display = "block";
-  if (table) table.classList.add("hidden");
+  spinner.style.display = "block";
+  table.classList.add("hidden");
 
-  const data = await api.apiGetAll();
-  renderMedicalTable(data);
+  const medical = await apiGetAll();
+  renderMedicalTable(medical);
 
-  if (spinner) spinner.style.display = "none";
-  if (table) table.classList.remove("hidden");
-  
+  spinner.style.display = "none";
+  table.classList.remove("hidden");
+}
+
+async function createMedical(data) {
+  const res = await apiCreate(data);
+  if (res.ok) {
+    showAlert("Medical record added");
+    resetMedicalForm();
+    loadMedical();
+  }
 }
 
 export async function editMedical(id) {
-  const record = await api.apiGetOne(id);
-  fillMedicalForm(record);
+  const record = await apiGetOne(id);
   setState({ editingId: id });
+  fillMedicalForm(record);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+async function updateMedical(id, data) {
+  const res = await apiUpdate(id, data);
+  if (res.ok) {
+    showAlert("Medical record updated");
+    setState({ editingId: null });
+    resetMedicalForm();
+    loadMedical();
+  }
 }
 
 export async function deleteMedicalAction(id) {
-  if (!confirm("Delete record?")) return;
-  await api.apiDelete(id);
-  showAlert("Deleted");
-  loadMedical();
+  if (!confirm("Delete this medical record?")) return;
+
+  const res = await apiDelete(id);
+  if (res.ok) {
+    showAlert("Medical record deleted");
+    loadMedical();
+  }
 }
