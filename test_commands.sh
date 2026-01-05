@@ -1,45 +1,44 @@
-# API Observation Via Codespace URL
-# API Observation Via Hopscotch
-# API Observation Via CURL
 
 # A. Get User Details
-curl -X GET "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/users"
+curl -X GET "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/api/users"
 
 # B. Create/Save User Details
-curl -X POST "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/users" \
+curl -X POST "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/api/users" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Aayusmita Patro",
+    "user_id": 1,
+    "name": "swastika",
     "age": 20,
-    "height": 160,
+    "height": 152,
     "weight": 60,
     "gender": "Female"
   }'
 
 # # C. Update User Details
 
-curl -X PUT "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/users/1" \
+curl -X PUT "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/api/users/1" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Aayusmita Updated",
+    "user_id": 1,
+    "name": "swastika",
     "age": 20,
-    "height": 160,
+    "height": 140,
     "weight": 58,
     "gender": "Female"
   }'
 
 
 # # D. Delete User Details
-curl -X DELETE "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/users/1"
+curl -X DELETE "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/api/users/1"
 
 
 
 # A. Get All User Activities
-curl -X GET "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/activities"
+curl -X GET "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/api/activity"
 
 
 # # B. Create / Save User Activity
-curl -X POST "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/activities" \
+curl -X POST "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/api/activity" \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 1,
@@ -50,7 +49,7 @@ curl -X POST "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/a
 
 
 # # C. Update User Activity
-curl -X PUT "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/activities/1" \
+curl -X PUT "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/api/activity/1" \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 1,
@@ -61,39 +60,33 @@ curl -X PUT "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/ac
 
 
 # # D. Delete User Activity
-curl -X DELETE "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/activities/1"
+curl -X DELETE "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/api/activity/1"
 
 # A. Get All Medical Records
-curl -X GET "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/medical"
+curl -X GET "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/api/medical"
 
 
 # B. Create Medical Record
-curl -X POST "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/medical" \
+curl -X POST "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/api/medical" \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 1,
-    "disease": "Diabetes",
-    "disease_type": "Chronic",
-    "genetic": "Yes",
-    "notes": "Family history present"
+    "disease": "Flu",
+    "genetic_disease": "No",
+    "allergies": "None"
   }'
 # C. Update Medical Record
-curl -X PUT "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/medical/2" \
+curl -X PUT "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/medical/2" \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 1,
     "disease": "Diabetes",
-    "disease_type": "Chronic",
-    "genetic": "Yes",
-    "notes": "Updated notes"
+    "genetic_disease": "nope",
+    "allergies": "None",
   }'
 
 
 # D. Delete Medical Record
-curl -X DELETE "https://improved-xylophone-5gjvv4q7p54v275vv-8000.app.github.dev/medical/2"
+curl -X DELETE "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/medical/2"
 
 
-# # DB Observation Via SQLite Web
-# # - install https://github.com/coleifer/sqlite-web
-# # - pip install sqlite-web
-# # - sqlite_web health_tracker.db
