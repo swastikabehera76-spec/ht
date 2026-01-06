@@ -18,6 +18,7 @@ export function renderActivitiesTable(activities) {
   }
 
   noActivities.classList.add("hidden");
+  // console.log(activity)
 
   activities.forEach(activity => {
     const row = document.createElement("tr");
