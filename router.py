@@ -41,6 +41,7 @@ FRONTEND_ROUTES = {
     "/medical"
 }
 
+
 class Router(BaseHTTPRequestHandler):
 
     # ---------------- CORS ----------------
@@ -70,6 +71,11 @@ class Router(BaseHTTPRequestHandler):
                 return get_user(self, int(path.split("/")[-1]))
             except ValueError:
                 return send_404(self)
+            
+
+        if path.startswith("/assets/"):
+            serve_static(self, "frontend" + path)
+            return True   
 
         # ===== ACTIVITY API =====
         if path == "/api/activity":
