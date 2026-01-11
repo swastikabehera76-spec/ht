@@ -30,8 +30,8 @@ class TestDatabaseBasics(unittest.TestCase):
 
         # Check: does 'students.db' file exist?
         self.assertTrue(
-            os.path.exists("students.db"),
-            "students.db file is missing"
+            os.path.exists("health_tracker.db"),
+            "users.db file is missing"
         )
 
     def test_can_connect_and_list_tables(self):
@@ -42,7 +42,7 @@ class TestDatabaseBasics(unittest.TestCase):
         """
 
         # Open a connection to the SQLite database
-        conn = sqlite3.connect("students.db")
+        conn = sqlite3.connect("health_tracker.db")
 
         # Create a cursor to run SQL queries
         cur = conn.cursor()
@@ -64,6 +64,6 @@ class TestDatabaseBasics(unittest.TestCase):
 
         # Check: expected table should exist
         self.assertIn(
-            "students",
+            "users",
             tables
         )

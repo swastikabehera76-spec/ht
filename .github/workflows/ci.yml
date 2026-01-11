@@ -41,7 +41,7 @@ jobs:
       - name: Smoke test endpoints
         run: |
           curl -i http://127.0.0.1:8000/ | head -n 20
-          curl -i http://127.0.0.1:8000/api/students | head -n 50
+          curl -i http://127.0.0.1:8000/api/users | head -n 50
 
       - name: Stop server
         if: always()

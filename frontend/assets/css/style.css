@@ -1,11 +1,99 @@
-body {
-  background-color: #93c3df; /* gray-100 */
-  /* font-family: system-ui, -apple-system, BlinkMacSystemFont,
-               "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial; */
-  color: #1f2937; /* gray-800 */
-  line-height: 1.6;
-}
 
-#header {
-    background-color: #0c354d;
-}
+  /* Global font & smooth rendering */
+  body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background:
+    linear-gradient(rgb(190, 235, 244),rgb(141, 193, 238),rgb(193, 225, 239));
+  }
+
+  /* Navbar hover underline animation */
+  nav a {
+    position: relative;
+  }
+
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, #4f46e5, #6366f1);
+    transition: width 0.3s ease;
+  }
+
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  /* Hero heading animation */
+  h2 {
+    animation: fadeSlide 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeSlide {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Illustration floating animation */
+  img {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  /* Feature cards glassmorphism */
+  section a {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  /* Feature card hover animation */
+  section a:hover {
+    transform: translateY(-8px) scale(1.02);
+    transition: all 0.35s ease;
+  }
+
+  /* Icon pulse on hover */
+  section a div {
+    transition: transform 0.3s ease;
+  }
+
+  section a:hover div {
+    transform: scale(1.15);
+  }
+
+  /* Buttons hover glow */
+  a.bg-indigo-600:hover {
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.35);
+  }
+
+  /* Footer subtle fade */
+  footer {
+    opacity: 0.8;
+  }
+
+  footer:hover {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
