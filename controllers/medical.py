@@ -15,21 +15,24 @@ def get_medical(handler, medical_id):
     medical = service_get_one(medical_id)
     return send_json(handler, 200, medical) if medical else send_404(handler)
 
-# def create_medical(handler):
-#     data = parse_json_body(handler)
-#     new_medical = service_create(data)
-#     return send_json(handler, 201, new_medical)
-def create_medical(self):
-    data = parse_json_body(self)
+def create_medical(handler):
+    try:
+        data = parse_json_body(handler)
 
-    # TEMP solution: hardcoded user (for now)
-    data["user_id"] = data.get("user_id")
+        user_id = data.get("user_id")
+        if not user_id:
+            return send_json(handler, 400, {
+                "error": "user_id is required"
+            })
 
-    if not data["user_id"]:
-        return send_404(self)  # or send_400
+        new_medical = service_create(data)
 
-    new_medical = service_create(data)
+        return send_json(handler, 201, new_medical)
 
+    except Exception as e:
+        return send_json(handler, 500, {
+            "error": str(e)
+        })
 
 def update_medical(handler, medical_id):
     data = parse_json_body(handler)
@@ -38,4 +41,6 @@ def update_medical(handler, medical_id):
 
 def delete_medical(handler, medical_id):
     service_delete(medical_id)
-    return send_json(handler, 200, {"message": "Medical record deleted"})
+    return send_json(handler, 200, {
+        "message": "Medical record deleted"
+    })

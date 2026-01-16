@@ -70,7 +70,8 @@ curl -X GET "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/api/me
 curl -X POST "https://vigilant-spork-69qv4g6j54vxf5rx5-8000.app.github.dev/api/medical" \
   -H "Content-Type: application/json" \
   -d '{
-    "user_id": 1,
+    "id": 8,
+    "user_id": 7,
     "disease": "Flu",
     "genetic_disease": "No",
     "allergies": "None"

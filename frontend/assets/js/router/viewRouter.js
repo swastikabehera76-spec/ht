@@ -1,6 +1,9 @@
+// router, viewRouter
 import { initUserController } from "../controllers/UserController.js";
 import { initActivitiesController } from "../controllers/ActivitiesController.js";
 import { initMedicalController } from "../controllers/MedicalController.js";
+import { initReportController } from "../controllers/ReportController.js";
+
 
 // Load HTML into #app
 async function loadView(path) {
@@ -32,6 +35,11 @@ export async function router() {
     initMedicalController();
   }
 
+   else if (path === "/report") {
+    await loadView("/frontend/pages/report.html");
+    initReportController();
+  }
+
   else {
     await loadView("/frontend/pages/404.html");
   }
@@ -50,8 +58,3 @@ export function initRouterEvents() {
 
   window.addEventListener("popstate", router);
 }
-
-
-
-
-

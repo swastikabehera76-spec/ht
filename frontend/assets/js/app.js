@@ -2,6 +2,8 @@
 import { initUserController } from "./controllers/UserController.js";
 import { initActivitiesController } from "./controllers/ActivitiesController.js";
 import { initMedicalController } from "./controllers/MedicalController.js";
+import { initJoinController } from "./controllers/ReportController.js";
+
 
 
 import { router } from "./router/viewRouter.js";

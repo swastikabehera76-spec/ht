@@ -1,3 +1,4 @@
+# router.py
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse
@@ -5,6 +6,9 @@ from urllib.parse import urlparse
 from core.static import serve_static
 from core.middleware import add_cors_headers
 from core.responses import send_404
+
+# -------- JOIN / REPORT controller --------
+from controllers.report import get_health_report
 
 # -------- USER controllers --------
 from controllers.user import (
@@ -37,8 +41,9 @@ from controllers.medical import (
 FRONTEND_ROUTES = {
     "/", "/home",
     "/users",
-    "/activity",
-    "/medical"
+    "/activities",   
+    "/medical",
+    "/report"
 }
 
 
@@ -62,6 +67,9 @@ class Router(BaseHTTPRequestHandler):
         if path.startswith("/frontend/"):
             return serve_static(self, path.lstrip("/"))
 
+        if path.startswith("/assets/"):
+            return serve_static(self, "frontend" + path)
+
         # ===== USERS API =====
         if path == "/api/users":
             return get_all_users(self)
@@ -71,11 +79,6 @@ class Router(BaseHTTPRequestHandler):
                 return get_user(self, int(path.split("/")[-1]))
             except ValueError:
                 return send_404(self)
-            
-
-        if path.startswith("/assets/"):
-            serve_static(self, "frontend" + path)
-            return True   
 
         # ===== ACTIVITY API =====
         if path == "/api/activity":
@@ -97,11 +100,14 @@ class Router(BaseHTTPRequestHandler):
             except ValueError:
                 return send_404(self)
 
+        # ===== REPORT API (JOIN) =====
+        if path == "/api/report":
+            return get_health_report(self)
+
         return send_404(self)
 
     # ---------------- POST ----------------
     def do_POST(self):
-
         if self.path == "/api/users":
             return create_user(self)
 
@@ -115,7 +121,6 @@ class Router(BaseHTTPRequestHandler):
 
     # ---------------- PUT ----------------
     def do_PUT(self):
-
         if self.path.startswith("/api/users/"):
             return update_user(self, int(self.path.split("/")[-1]))
 
@@ -129,7 +134,6 @@ class Router(BaseHTTPRequestHandler):
 
     # ---------------- DELETE ----------------
     def do_DELETE(self):
-
         if self.path.startswith("/api/users/"):
             return delete_user(self)
 
