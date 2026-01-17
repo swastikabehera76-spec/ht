@@ -1,12 +1,17 @@
-from http.server import HTTPServer
+# app.py
+import os
+from http.server import ThreadingHTTPServer
 from router import Router
 from database.connection import init_database
 
-def run_serer():
+def main():
     init_database()
-    server = HTTPServer(("", 8000),Router)
-    print("🚀 Health Tracker API running at http://localhost:8000")
+
+    port = int(os.environ.get("PORT", "8000"))
+    server = ThreadingHTTPServer(("0.0.0.0", port), Router)
+
+    print(f"🚀 Server running at http://localhost:{port}")
     server.serve_forever()
 
 if __name__ == "__main__":
-    run_serer()
+    main()

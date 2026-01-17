@@ -1,99 +1,107 @@
+:root {
+  --bg-dark: #0b1215;
+  --bg-card: rgba(255, 255, 255, 0.06);
+  --accent: #7CFF4F;
+  --text-main: #ffffff;
+  --text-muted: #9ca3af;
+}
 
-  /* Global font & smooth rendering */
-  /* body {
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    background:
-    linear-gradient(rgb(190, 235, 244),rgb(141, 193, 238),rgb(193, 225, 239));
-  } */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
 
-  /* Navbar hover underline animation */
-  nav a {
-    position: relative;
-  }
+body {
+  background: radial-gradient(circle at top, #122026, var(--bg-dark));
+  color: var(--text-main);
+  min-height: 100vh;
+}
 
-  nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(to right, #4f46e5, #6366f1);
-    transition: width 0.3s ease;
-  }
+/* NAVBAR
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 60px;
+  align-items: center;
+} */
 
-  nav a:hover::after {
-    width: 100%;
-  }
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+}
 
-  /* Hero heading animation */
-  h2 {
-    animation: fadeSlide 0.8s ease-out forwards;
-  }
+.logo span {
+  color: var(--accent);
+}
 
-  @keyframes fadeSlide {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+/* .navbar nav a {
+  margin-right: 25px;
+  color: var(--text-muted);
+  text-decoration: none;
+} */
 
-  /* Illustration floating animation */
-  img {
-    animation: float 4s ease-in-out infinite;
-  }
+.btn-primary {
+  background: var(--accent);
+  color: #000;
+  padding: 10px 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
 
-  @keyframes float {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-12px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  padding: 80px 60px;
+  gap: 40px;
+}
 
-  /* Feature cards glassmorphism */
-  section a {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-  }
+.tag {
+  color: var(--accent);
+  letter-spacing: 2px;
+  font-size: 12px;
+}
 
-  /* Feature card hover animation */
-  section a:hover {
-    transform: translateY(-8px) scale(1.02);
-    transition: all 0.35s ease;
-  }
+.hero h1 {
+  font-size: 48px;
+  margin: 15px 0;
+}
 
-  /* Icon pulse on hover */
-  section a div {
-    transition: transform 0.3s ease;
-  }
+.hero h1 span {
+  color: var(--accent);
+}
 
-  section a:hover div {
-    transform: scale(1.15);
-  }
+.hero p {
+  color: var(--text-muted);
+  max-width: 500px;
+  margin-bottom: 30px;
+}
 
-  /* Buttons hover glow */
-  a.bg-indigo-600:hover {
-    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.35);
-  }
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 12px 22px;
+  border-radius: 25px;
+}
 
-  /* Footer subtle fade */
-  footer {
-    opacity: 0.8;
-  }
+/* CARDS */
+.hero-cards {
+  display: flex;
+  gap: 20px;
+}
 
-  footer:hover {
-    opacity: 1;
-    transition: opacity 0.3s ease;
-  }
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(15px);
+  padding: 25px;
+  border-radius: 20px;
+  width: 200px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* ---------------- USER TABLE ----------------- */
+
