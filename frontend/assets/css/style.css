@@ -1,11 +1,11 @@
 
   /* Global font & smooth rendering */
-  body {
+  /* body {
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
     background:
     linear-gradient(rgb(190, 235, 244),rgb(141, 193, 238),rgb(193, 225, 239));
-  }
+  } */
 
   /* Navbar hover underline animation */
   nav a {
