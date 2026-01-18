@@ -19,37 +19,41 @@ body {
   min-height: 100vh;
 }
 
-/* NAVBAR
+/* NAVBAR */
 .navbar {
   display: flex;
-  justify-content: space-between;
-  padding: 20px 60px;
   align-items: center;
-} */
+  justify-content: space-between; /* pushes left ↔ right */
+  padding: 15px 30px;
+  background: #0b1c24;
+}
+
 
 .logo {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
 }
 
 .logo span {
-  color: var(--accent);
+  color: #22c55e; /* green */
 }
 
-/* .navbar nav a {
-  margin-right: 25px;
-  color: var(--text-muted);
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: #3b82f6;
   text-decoration: none;
-} */
-
-.btn-primary {
-  background: var(--accent);
-  color: #000;
-  padding: 10px 18px;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
+  font-weight: 500;
 }
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
 
 /* HERO */
 .hero {

@@ -1,85 +1,115 @@
-<div class="max-w-3xl mx-auto p-6">
 
-  <!-- Header -->
-  <div class="flex items-center justify-between mb-6">
-    <h1 class="text-3xl font-bold">Health Tracker – User</h1>
-    <a href="/home" data-link class="text-sm text-blue-600 underline">
-      ← Back to Home
-    </a>
-  </div>
+<body class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white">
 
-  <!-- Add / Edit User Form -->
-  <div class="bg-white p-5 rounded shadow mb-8">
-    <h2 class="font-semibold mb-3 text-lg">Add / Edit User</h2>
 
-    <form id="userForm" class="space-y-3">
-      <input type="text" id="name" placeholder="Name" required
-        class="w-full border rounded px-3 py-2">
+  <!-- MAIN CONTENT -->
+  <main class="max-w-5xl mx-auto px-6 py-10 ">
 
-      <input type="number" id="age" placeholder="Age" required
-        class="w-full border rounded px-3 py-2">
+    <!-- HEADER -->
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-3xl font-semibold">
+        Health Tracker – User
+      </h2>
 
-      <input type="number" id="height" placeholder="Height (cm)" required
-        class="w-full border rounded px-3 py-2">
+      <a href="/home" data-link
+        class="text-blue-400 hover:text-blue-300 transition">
+        ← Back to Home
+      </a>
+    </div>
 
-      <input type="number" id="weight" placeholder="Weight (kg)" required
-        class="w-full border rounded px-3 py-2">
+    <!-- FORM CARD -->
+    <section class="bg-slate-900 p-6 rounded-xl shadow-lg border border-slate-700 mb-10">
+      <h3 class="text-lg font-semibold text-slate-200 mb-4">
+        Add / Edit User
+      </h3>
 
-      <select id="gender" required
-        class="w-full border rounded px-3 py-2">
-        <option value="">Select Gender</option>
-        <option>Male</option>
-        <option>Female</option>
-        <option>Other</option>
-      </select>
+      <form id="userForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-      <div class="flex space-x-2">
-        <button type="submit" id="submitBtn"
-          class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">
-          Save User
-        </button>
+        <input type="text" id="name" placeholder="Name" required
+          class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2
+                 text-slate-100 placeholder-slate-400
+                 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-        <button type="button" id="cancelBtn"
-          class="flex-1 bg-gray-400 hover:bg-gray-500 text-white py-2 rounded hidden">
-          Cancel
-        </button>
+        <input type="number" id="age" placeholder="Age" required
+          class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2
+                 text-slate-100 placeholder-slate-400
+                 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+        <input type="number" id="height" placeholder="Height (cm)" required
+          class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2
+                 text-slate-100 placeholder-slate-400
+                 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+        <input type="number" id="weight" placeholder="Weight (kg)" required
+          class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2
+                 text-slate-100 placeholder-slate-400
+                 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+        <select id="gender" required
+          class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2
+                 text-slate-100
+                 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">Select Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+
+        <!-- BUTTONS -->
+        <div class="flex gap-3 md:col-span-2">
+          <button type="submit" id="submitBtn"
+            class="flex-1 bg-blue-600 hover:bg-blue-700
+                   text-white py-2.5 rounded-lg font-medium transition">
+            Save User
+          </button>
+
+          <button type="button" id="cancelBtn"
+            class="flex-1 bg-slate-600 hover:bg-slate-700
+                   text-white py-2.5 rounded-lg font-medium transition hidden">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- USERS TABLE -->
+    <section class="bg-slate-900 p-6 rounded-xl shadow-lg border border-slate-700">
+
+      <h3 class="text-lg font-semibold text-slate-200 mb-4">
+        All Users
+      </h3>
+
+      <!-- LOADING -->
+      <div id="loadingSpinner" class="flex justify-center py-6">
+        <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
       </div>
-    </form>
-  </div>
 
-  <!-- Users Table -->
-  <div class="bg-white p-5 rounded shadow">
-    <h2 class="font-semibold mb-4 text-lg">All Users</h2>
+      <!-- TABLE -->
+      <div id="usersTableContainer" class="hidden overflow-x-auto">
+        <table class="min-w-full border border-slate-700 rounded-lg overflow-hidden">
+          <thead class="bg-slate-800 text-slate-300 text-sm uppercase">
+            <tr>
+              <th class="px-4 py-3">ID</th>
+              <th class="px-4 py-3">Name</th>
+              <th class="px-4 py-3">Age</th>
+              <th class="px-4 py-3">Height</th>
+              <th class="px-4 py-3">Weight</th>
+              <th class="px-4 py-3">Gender</th>
+              <th class="px-4 py-3">Actions</th>
+            </tr>
+          </thead>
 
-    <!-- Loading Spinner -->
-    <div id="loadingSpinner" class="text-center py-4">
-      <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto"></div>
-    </div>
+          <tbody id="usersTableBody"
+            class="divide-y divide-slate-700 text-slate-200">
+          </tbody>
+        </table>
 
-    <!-- Users Table Container -->
-    <div id="usersTableContainer" class="hidden overflow-x-auto">
-      <table class="min-w-full text-left border">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="px-3 py-2">ID</th>
-            <th class="px-3 py-2">Name</th>
-            <th class="px-3 py-2">Age</th>
-            <th class="px-3 py-2">Height</th>
-            <th class="px-3 py-2">Weight</th>
-            <th class="px-3 py-2">Gender</th>
-            <th class="px-3 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody id="usersTableBody"></tbody>
-      </table>
+        <p id="noUsers" class="text-center text-slate-400 mt-4 hidden">
+          No users found. Add one using the form above.
+        </p>
+      </div>
+    </section>
 
-      <p id="noUsers" class="text-center text-gray-500 mt-3 hidden">
-        No users found. Add one using the form above.
-      </p>
-    </div>
-  </div>
+  </main>
+</body>
 
-  <!-- Alert container -->
-  <div id="alertContainer" class="fixed top-4 right-4 space-y-2 z-50"></div>
-
-</div>
