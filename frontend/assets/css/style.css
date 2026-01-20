@@ -1,2 +1,47 @@
 
-  
+body {
+  background: radial-gradient(circle at top, #020617, #000);
+  color: #e5e7eb;
+}
+
+/* Top Bar */
+.topbar {
+  height: 64px;
+  background: rgba(2,6,23,0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 600;
+  color: #38bdf8;
+}
+
+.brand span {
+  color: #22c55e;
+}
+
+.topbar a {
+  margin-left: 24px;
+  text-decoration: none;
+  color: #cbd5f5;
+  font-size: 14px;
+}
+
+.topbar a:hover {
+  color: #38bdf8;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #1e293b;
+  color: #94a3b8;
+  margin-top: 60px;
+}
