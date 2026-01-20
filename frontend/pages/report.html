@@ -1,45 +1,39 @@
 
-
-
-<!-- ========================================
-     UPDATED REPORT.HTML WITH SEARCH
-     ======================================== -->
-
-<div class="max-w-6xl mx-auto p-6">
+<div class="max-w-7xl mx-auto p-6">
   
   <!-- HEADER -->
   <div class="flex items-center justify-between mb-6">
-    <h1 class="text-3xl font-bold">Health Profiles</h1>
-    <a href="/home" data-link class="text-sm text-blue-600 hover:text-blue-800 underline">
+    <h1 class="text-4xl font-bold text-gray-900">Health Profiles Report</h1>
+    <a href="/home" data-link class="text-blue-600 hover:text-blue-800 underline font-medium">
       ← Back to Home
     </a>
   </div>
 
-  <!-- SEARCH & FILTER SECTION -->
-  <div class="bg-white p-5 rounded-lg shadow mb-6">
-    <div class="grid md:grid-cols-3 gap-4">
+  <!-- SEARCH, FILTER & SORT SECTION -->
+  <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+    <div class="grid md:grid-cols-4 gap-4 mb-4">
       
       <!-- Search Input -->
       <div class="md:col-span-2">
-        <label class="block text-sm font-medium text-gray-700 mb-2">
-          Search by Name or User ID
+        <label class="block text-sm font-semibold text-gray-700 mb-2">
+          🔍 Search by Name or User ID
         </label>
         <input 
           type="text" 
           id="searchInput" 
           placeholder="Type to search..." 
-          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         >
       </div>
 
       <!-- Filter by Gender -->
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">
-          Filter by Gender
+        <label class="block text-sm font-semibold text-gray-700 mb-2">
+          👤 Filter by Gender
         </label>
         <select 
           id="genderFilter" 
-          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">All Genders</option>
           <option value="Male">Male</option>
@@ -47,54 +41,123 @@
           <option value="Other">Other</option>
         </select>
       </div>
+
+      <!-- Sort By -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">
+          📊 Sort By
+        </label>
+        <select 
+          id="sortBy" 
+          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">Default Order</option>
+          <option value="user_id-asc">User ID ↑</option>
+          <option value="user_id-desc">User ID ↓</option>
+          <option value="name-asc">Name (A-Z)</option>
+          <option value="name-desc">Name (Z-A)</option>
+          <option value="age-asc">Age (Low to High)</option>
+          <option value="age-desc">Age (High to Low)</option>
+          <option value="height-asc">Height (Low to High)</option>
+          <option value="height-desc">Height (High to Low)</option>
+          <option value="weight-asc">Weight (Low to High)</option>
+          <option value="weight-desc">Weight (High to Low)</option>
+          <option value="steps-asc">Steps (Low to High)</option>
+          <option value="steps-desc">Steps (High to Low)</option>
+        </select>
+      </div>
     </div>
 
     <!-- Action Buttons -->
-    <div class="flex gap-3 mt-4">
+    <div class="flex flex-wrap gap-3">
       <button 
         id="searchBtn" 
-        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2"
       >
-        🔍 Search
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        Search
       </button>
       <button 
         id="clearSearchBtn" 
-        class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg font-medium transition"
+        class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2"
       >
-        ✖ Clear
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+        Clear All
+      </button>
+      <button 
+        id="exportCsvBtn" 
+        class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2 ml-auto"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        Export CSV
+      </button>
+      <button 
+        id="exportPdfBtn" 
+        class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+        </svg>
+        Export PDF
       </button>
     </div>
 
     <!-- Search Results Info -->
-    <div id="searchInfo" class="mt-3 text-sm text-gray-600 hidden">
-      Showing <span id="resultCount" class="font-semibold">0</span> results
+    <div id="searchInfo" class="mt-4 text-sm text-gray-600 hidden">
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        Showing <span id="resultCount" class="font-bold text-blue-600">0</span> results
+        <span id="sortInfo" class="ml-2 text-blue-600 font-medium"></span>
+      </div>
     </div>
   </div>
 
   <!-- LOADING SPINNER -->
-  <div id="loadingSpinner" class="text-center py-8">
-    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
-    <p class="text-gray-600 mt-3">Loading health data...</p>
+  <div id="loadingSpinner" class="text-center py-12">
+    <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mx-auto mb-4"></div>
+    <p class="text-gray-600 font-medium text-lg">Loading health data...</p>
   </div>
 
   <!-- TABLE CONTAINER -->
-  <div id="ReportTableContainer" class="hidden bg-white rounded-lg shadow overflow-hidden">
+  <div id="ReportTableContainer" class="hidden bg-white rounded-xl shadow-lg overflow-hidden">
     <div class="overflow-x-auto">
       <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-800 text-white">
+        <thead class="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
           <tr>
-            <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">User ID</th>
-            <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Name</th>
-            <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Age</th>
-            <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Height</th>
-            <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Weight</th>
-            <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Gender</th>
-            <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Steps</th>
-            <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Water (L)</th>
-            <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Calories</th>
-            <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Disease</th>
-            <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Genetic</th>
-            <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Allergies</th>
+            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition" data-sort="user_id">
+              <div class="flex items-center gap-2">
+                User ID
+                <svg class="w-4 h-4 sort-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                </svg>
+              </div>
+            </th>
+            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition" data-sort="name">
+              <div class="flex items-center gap-2">
+                Name
+                <svg class="w-4 h-4 sort-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                </svg>
+              </div>
+            </th>
+            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Age</th>
+            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Height</th>
+            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Weight</th>
+            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Gender</th>
+            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Steps</th>
+            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Water (L)</th>
+            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Calories</th>
+            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Disease</th>
+            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Genetic</th>
+            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Allergies</th>
           </tr>
         </thead>
         <tbody id="reportTableBody" class="bg-white divide-y divide-gray-200">
@@ -104,7 +167,10 @@
     </div>
 
     <!-- No Results Message -->
-    <p id="noRows" class="text-center text-gray-500 py-8 hidden">
+    <p id="noRows" class="text-center text-gray-500 py-12 text-lg font-medium hidden">
+      <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+      </svg>
       No health data found.
     </p>
   </div>
