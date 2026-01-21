@@ -1,1 +1,288 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthTracker - Modern Health Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #0f0f0f;
+    }
+
+    /* Animated Grid Background */
+    .grid-bg {
+      background-image: 
+        linear-gradient(rgba(236, 72, 153, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(236, 72, 153, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 50px 50px; }
+    }
+
+
+    /* Pink Gradient */
+    .pink-gradient {
+      background: linear-gradient(135deg, #22c55e, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Card Styles */
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px);
+      border-color: #22c55e;
+      box-shadow: #22c55e;
+    }
+
+    /* Fade animations */
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .slide-up {
+      animation: slideUp 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Delays */
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+
+    /* Button hover */
+    .btn-primary {
+      background: linear-gradient(135deg, 22c55e, #6be265);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(72, 236, 170, 0.4);
+    }
+
+    .btn-outline {
+      border: 2px solid #48ec94;
+      transition: all 0.3s ease;
+    }
+
+
+  </style>
+</head>
+<body class="text-white">
+
+  <!-- Hero Section -->
+  <section class="grid-bg min-h-screen flex items-center pt-20 px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto w-full">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        
+        <!-- Left Content -->
+        <div class="space-y-8">
+
+          <h1 class="text-5xl lg:text-7xl font-black leading-tight slide-up delay-100">
+            Modern Health
+            <span class="block pink-gradient">Management System</span>
+          </h1>
+
+          <p class="text-xl text-gray-400 leading-relaxed slide-up delay-200">
+            Transform healthcare delivery with our comprehensive platform. Track patient data, monitor activities, and generate insights effortlessly.
+          </p>
+
+          <div class="flex flex-wrap gap-4 slide-up delay-300">
+            <a href="/users" data-link class="btn-primary px-8 py-4 rounded-xl font-semibold text-white inline-flex items-center gap-2">
+              Get Started
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </a>
+            <button class="btn-outline px-8 py-4 rounded-xl font-semibold text-white">
+              Learn More
+            </button>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-8 pt-8 slide-up delay-400">
+            <div>
+              <div class="text-4xl font-black pink-gradient">10K+</div>
+              <div class="text-sm text-gray-500 mt-1">Users</div>
+            </div>
+            <div>
+              <div class="text-4xl font-black pink-gradient">50K+</div>
+              <div class="text-sm text-gray-500 mt-1">Records</div>
+            </div>
+            <div>
+              <div class="text-4xl font-black pink-gradient">99.9%</div>
+              <div class="text-sm text-gray-500 mt-1">Uptime</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Content - Dashboard Preview -->
+        <div class="slide-up delay-500">
+          <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 border border-gray-800">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-lg font-bold">Quick Access</h3>
+              <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+            </div>
+
+            <div class="space-y-4">
+              <!-- Module Cards -->
+              <a href="/users" data-link class="card-hover block bg-gray-900/50 rounded-2xl p-6 group">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="font-bold text-white group-hover:text-pink-400 transition">User Management</h4>
+                    <p class="text-sm text-gray-500">Manage patient profiles</p>
+                  </div>
+                  <svg class="w-5 h-5 text-gray-600 group-hover:text-pink-400 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </div>
+              </a>
+
+              <a href="/activities" data-link class="card-hover block bg-gray-900/50 rounded-2xl p-6 group">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="font-bold text-white group-hover:text-pink-400 transition">Activity Tracking</h4>
+                    <p class="text-sm text-gray-500">Monitor daily metrics</p>
+                  </div>
+                  <svg class="w-5 h-5 text-gray-600 group-hover:text-pink-400 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </div>
+              </a>
+
+              <a href="/medical" data-link class="card-hover block bg-gray-900/50 rounded-2xl p-6 group">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="font-bold text-white group-hover:text-pink-400 transition">Medical Records</h4>
+                    <p class="text-sm text-gray-500">Secure health data</p>
+                  </div>
+                  <svg class="w-5 h-5 text-gray-600 group-hover:text-pink-400 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </div>
+              </a>
+
+              <a href="/report" data-link class="card-hover block bg-gray-900/50 rounded-2xl p-6 group">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="font-bold text-white group-hover:text-pink-400 transition">Analytics & Reports</h4>
+                    <p class="text-sm text-gray-500">Generate insights</p>
+                  </div>
+                  <svg class="w-5 h-5 text-gray-600 group-hover:text-pink-400 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-32 px-6 lg:px-8 bg-gradient-to-b from-transparent to-gray-950">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="text-center mb-20">
+        <h2 class="text-4xl lg:text-5xl font-black mb-4">
+          Everything You Need in
+          <span class="block pink-gradient">One Platform</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        
+        <div class="card-hover bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Secure & Private</h3>
+          <p class="text-gray-400 leading-relaxed">Enterprise-grade security with end-to-end encryption and HIPAA compliance.</p>
+        </div>
+
+        <div class="card-hover bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Lightning Fast</h3>
+          <p class="text-gray-400 leading-relaxed">Real-time synchronization with instant updates across all devices.</p>
+        </div>
+
+        <div class="card-hover bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Smart Analytics</h3>
+          <p class="text-gray-400 leading-relaxed">AI-powered insights and predictive analytics for better decisions.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
