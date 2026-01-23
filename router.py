@@ -44,6 +44,7 @@ FRONTEND_ROUTES = {
     "/activities",   
     "/medical",
     "/report"
+    "/profile"
 }
 
 
@@ -105,6 +106,7 @@ class Router(BaseHTTPRequestHandler):
             return get_health_report(self)
 
         return send_404(self)
+    
 
     # ---------------- POST ----------------
     def do_POST(self):
