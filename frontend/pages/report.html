@@ -1,114 +1,118 @@
-<div class="max-w-7xl mx-auto p-8 bg-white/98 backdrop-blur-xl rounded-2xl border border-white/90 shadow-2xl">
-  
-  <!-- Page Header -->
-  <div class="mb-8">
-    <h1 class="text-4xl font-bold text-white drop-shadow-2xl mb-2">📊 Health Report</h1>
-    <p class="text-blue-100 text-lg">Combined data from Users, Activity & Medical Records</p>
+<div class="max-w-6xl mx-auto p-6">
+
+  <!-- HEADER -->
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-3xl font-bold text-black">Health Report</h1>
+    <a href="/home" data-link
+      class="text-sm text-blue-600 hover:text-blue-800 underline">
+      ← Back to Home
+    </a>
   </div>
 
-  <!-- Controls Section -->
-  <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-6">
-    <div class="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
-      
-      <!-- Search Bar -->
-      <div class="flex-1 w-full">
-        <div class="relative">
-          <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-          <input 
-            type="text" 
-            id="searchInput" 
-            class="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" 
-            placeholder="Search by User ID, Name, or Disease..."
-          />
-          <button id="clearSearch" class="absolute right-3 top-1/2 -translate-y-1/2 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center transition-all hidden">
-            <i class="fas fa-times text-xs"></i>
-          </button>
-        </div>
+  <!-- CONTROLS CARD -->
+  <div class="bg-white p-6 rounded-lg shadow mb-8">
+
+    <div class="grid lg:grid-cols-4 gap-4 items-end">
+
+      <!-- SEARCH -->
+      <div class="lg:col-span-2">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search by User ID, Name, Disease..."
+          class="w-full border border-gray-300 rounded-lg px-4 py-2
+                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
       </div>
-      
-      <!-- Sort Controls -->
-      <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-        <div class="relative w-full sm:w-48">
-          <i class="fa-solid fa-arrow-down-a-z absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm"></i>
-          <select id="sortBy" class="w-full h-11 border border-gray-300 rounded-lg pl-10 pr-4 text-sm bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
-            <option value="user_id">Sort: User ID</option>
-            <option value="name">Sort: Name</option>
-            <option value="age">Sort: Age</option>
-            <option value="steps">Sort: Steps</option>
-            <option value="calories_burned">Sort: Calories</option>
-          </select>
-        </div>
-        
-        <div class="relative w-full sm:w-32">
-          <i class="fa-solid fa-up-down absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm"></i>
-          <select id="sortDir" class="w-full h-11 border border-gray-300 rounded-lg pl-10 pr-4 text-sm bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
-            <option value="asc">Asc ↑</option>
-            <option value="desc">Desc ↓</option>
-          </select>
-        </div>
+
+      <!-- SORT BY -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Sort By</label>
+        <select id="sortBy"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2
+                 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="user_id">User ID</option>
+          <option value="name">Name</option>
+          <option value="age">Age</option>
+          <option value="steps">Steps</option>
+          <option value="calories_burned">Calories</option>
+        </select>
       </div>
-      
-      <!-- Export Buttons -->
-      <div class="flex gap-2 w-full lg:w-auto lg:ml-auto">
-        <button id="exportCsvBtn" class="flex-1 sm:flex-initial h-11 px-4 rounded-lg border border-gray-300 bg-white text-sm text-gray-800 inline-flex items-center gap-2 justify-center hover:bg-gray-50 transition-all font-medium">
-          <i class="fa-solid fa-file-csv text-green-600 text-base"></i>
-          CSV
+
+      <!-- SORT DIR -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Order</label>
+        <select id="sortDir"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2
+                 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- EXPORT + RESULT -->
+    <div class="flex flex-wrap items-center justify-between mt-4 gap-3">
+      <span id="resultCount" class="text-sm text-gray-600">
+        Showing all records
+      </span>
+
+      <div class="flex gap-2">
+        <button id="exportCsvBtn"
+          class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg text-sm">
+          Export CSV
         </button>
-        <button id="exportPdfBtn" class="flex-1 sm:flex-initial h-11 px-4 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm inline-flex items-center gap-2 justify-center hover:from-blue-600 hover:to-blue-700 transition-all font-semibold shadow-md hover:shadow-lg">
-          <i class="fa-solid fa-file-pdf text-base"></i>
-          PDF
+        <button id="exportPdfBtn"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm">
+          Export PDF
         </button>
       </div>
     </div>
-    
-    <!-- Result Count -->
-    <div class="mt-4">
-      <span id="resultCount" class="text-sm text-gray-600 font-medium">Showing all records</span>
-    </div>
+
   </div>
 
-  <!-- Loading Spinner -->
-  <div id="loadingSpinner" class="text-center py-12">
-    <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-200 border-t-blue-500 mb-4"></div>
-    <p class="text-gray-600">Loading health report...</p>
+  <!-- LOADING -->
+  <div id="loadingSpinner" class="text-center py-8">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
+    <p class="text-gray-600 mt-2">Loading report...</p>
   </div>
 
-  <!-- Report Table Container -->
-  <div id="reportTableContainer" class="bg-white rounded-xl shadow-sm border border-gray-200 hidden">
-    <div class="p-6 border-b border-gray-200">
-      <h2 class="text-xl font-bold text-gray-800">Complete Health Overview</h2>
+  <!-- REPORT TABLE -->
+  <div id="reportTableContainer" class="bg-white rounded-lg shadow hidden overflow-x-auto">
+
+    <div class="px-6 py-4 border-b">
+      <h2 class="font-semibold text-black">Complete Health Overview</h2>
     </div>
-    
-    <div class="overflow-x-auto">
-      <table class="min-w-full">
-        <thead class="bg-gray-50">
-          <tr>
-            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">User ID</th>
-            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Name</th>
-            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Age</th>
-            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Height</th>
-            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Weight</th>
-            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Gender</th>
-            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Steps</th>
-            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Water</th>
-            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Calories</th>
-            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Disease</th>
-            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Genetic</th>
-            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Allergies</th>
-          </tr>
-        </thead>
-        <tbody id="reportTableBody" class="bg-white divide-y divide-gray-200">
-          <!-- Data will be inserted here -->
-        </tbody>
-      </table>
-      
-      <div id="noRows" class="text-center py-12 hidden">
-        <div class="flex flex-col items-center gap-3">
-          <i class="fas fa-folder-open text-5xl text-gray-300"></i>
-          <p class="text-lg font-medium text-gray-500">No health records found</p>
-          <small class="text-gray-400">Try a different search term</small>
-        </div>
-      </div>
-    </div>
+
+    <table class="min-w-full divide-y divide-gray-200 text-black">
+      <thead class="bg-gray-800 text-white">
+        <tr>
+          <th class="px-4 py-3 text-left text-xs uppercase">User ID</th>
+          <th class="px-4 py-3 text-left text-xs uppercase">Name</th>
+          <th class="px-4 py-3 text-left text-xs uppercase">Age</th>
+          <th class="px-4 py-3 text-left text-xs uppercase">Height</th>
+          <th class="px-4 py-3 text-left text-xs uppercase">Weight</th>
+          <th class="px-4 py-3 text-left text-xs uppercase">Gender</th>
+          <th class="px-4 py-3 text-left text-xs uppercase">Steps</th>
+          <th class="px-4 py-3 text-left text-xs uppercase">Water</th>
+          <th class="px-4 py-3 text-left text-xs uppercase">Calories</th>
+          <th class="px-4 py-3 text-left text-xs uppercase">Disease</th>
+          <th class="px-4 py-3 text-left text-xs uppercase">Genetic</th>
+          <th class="px-4 py-3 text-left text-xs uppercase">Allergies</th>
+        </tr>
+      </thead>
+
+      <tbody id="reportTableBody" class="divide-y divide-gray-200">
+        <!-- JS rows -->
+      </tbody>
+    </table>
+
+    <p id="noRows" class="text-center text-gray-500 py-6 hidden">
+      No health records found.
+    </p>
+
   </div>
+
 </div>
