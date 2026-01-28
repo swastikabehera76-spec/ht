@@ -1,4 +1,5 @@
-// components/ReportForm.js
+
+// frontend/assets/js/components/reportForm.js
 import { $ } from "../utils/dom.js";
 
 export function resetReportForm() {

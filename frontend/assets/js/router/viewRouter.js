@@ -1,101 +1,56 @@
+// frontend/assets/js/router/viewRouter.js
+import { initUserController } from "../controllers/UserController.js";
+import { initActivitiesController } from "../controllers/ActivitiesController.js";
+import { initMedicalController } from "../controllers/MedicalController.js";
+import { initreportController } from "../controllers/ReportController.js";
+import { initProfileController } from "../controllers/profileController.js";
 
+
+
+// Load HTML into #app
 async function loadView(path) {
   const res = await fetch(path);
-
-  // If view not found → show 404
-  if (!res.ok) {
-    const fallback = await fetch("/frontend/pages/404.html").then(r => r.text());
-    document.querySelector("#app").innerHTML = fallback;
-    return;
-  }
-
   const html = await res.text();
   document.querySelector("#app").innerHTML = html;
 }
 
-// --------------------
-// Main Router
-// --------------------
+// Main router
 export async function router() {
-  // Normalize path (remove trailing slash except "/")
-  let path = window.location.pathname;
-  if (path.length > 1) path = path.replace(/\/$/, "");
+  const path = window.location.pathname;
 
-  // --------------------
-  // HOME
-  // --------------------
   if (path === "/" || path === "/home") {
     await loadView("/frontend/pages/home.html");
-    return;
   }
 
-  // --------------------
-  // USERS (CRUD)
-  // --------------------
-  if (path === "/users") {
+  else if (path === "/users") {
     await loadView("/frontend/pages/users.html");
-    const mod = await import("../controllers/UserController.js");
-    mod.initUserController();
-    return;
+    initUserController();
   }
 
-  // --------------------
-  // ACTIVITIES (CRUD)
-  // --------------------
-  if (path === "/activities") {
+  else if (path === "/activities") {
     await loadView("/frontend/pages/activities.html");
-    const mod = await import("../controllers/ActivitiesController.js");
-    mod.initActivitiesController();
-    return;
+    initActivitiesController();
   }
 
-  // --------------------
-  // MEDICAL (CRUD)
-  // --------------------
-  if (path === "/medical") {
+  else if (path === "/medical") {
     await loadView("/frontend/pages/medical.html");
-    const mod = await import("../controllers/MedicalController.js");
-    mod.initMedicalController();
-    return;
+    initMedicalController();
   }
-
-  // --------------------
-  // REPORT (JOIN)
-  // --------------------
-  if (path === "/report") {
+  else if (path === "/report") {
     await loadView("/frontend/pages/report.html");
-    const mod = await import("../controllers/ReportController.js");
-    mod.initReportController();
-    return;
+    initreportController();
   }
-  // --------------------
-   // PROFILE PAGE (dynamic): /profiles/:id
-  // --------------------
-  if (path.startsWith("/profile/")) {
-    const idStr = path.split("/")[2]; // "/profiles/1" -> "1"
-    const id = Number(idStr);
-
-    // If invalid id, show 404
-    if (!Number.isInteger(id)) {
-      await loadView("/frontend/pages/404.html");
-      return;
-    }
-
+   else if (path === "/profile") {
     await loadView("/frontend/pages/profile.html");
-    const mod = await import("../controllers/profileController.js");
-    mod.initProfileController(id);
-    return;
+    initProfileController();
   }
 
-  // --------------------
-  // DEFAULT (404)
-  // --------------------
-  await loadView("/frontend/pages/404.html");
+  else {
+    await loadView("/frontend/pages/404.html");
+  }
 }
 
-// --------------------
-// SPA Navigation Events
-// --------------------
+// SPA navigation
 export function initRouterEvents() {
   document.addEventListener("click", (e) => {
     const link = e.target.closest("[data-link]");
@@ -108,3 +63,8 @@ export function initRouterEvents() {
 
   window.addEventListener("popstate", router);
 }
+
+
+
+
+

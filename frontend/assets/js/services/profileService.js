@@ -1,27 +1,45 @@
+
 // frontend/assets/js/services/profileService.js
-// Only data fetching / shaping (no DOM here)
+// Service for fetching user profile data
 
-// -------- Fetch USER by ID --------
 export async function fetchUserById(userId) {
-  const res = await fetch(`/api/users/${userId}`);
-  if (!res.ok) return null;
-  return res.json();
+  try {
+    const res = await fetch(`/api/users/${userId}`);
+    if (!res.ok) {
+      console.error(`Failed to fetch user: ${res.status}`);
+      return null;
+    }
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    return null;
+  }
 }
 
-// -------- Fetch ACTIVITIES for user --------
 export async function fetchActivitiesForUser(userId) {
-  const res = await fetch(`/api/activities`);
-  if (!res.ok) return [];
-
-  const all = await res.json();
-  return (all || []).filter((a) => Number(a.user_id) === Number(userId));
+  try {
+    const res = await fetch(`/api/users/${userId}/activities`);
+    if (!res.ok) {
+      console.error(`Failed to fetch activities: ${res.status}`);
+      return [];
+    }
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching activities:", error);
+    return [];
+  }
 }
 
-// -------- Fetch MEDICAL records for user --------
 export async function fetchMedicalForUser(userId) {
-  const res = await fetch(`/api/medical`);
-  if (!res.ok) return [];
-
-  const all = await res.json();
-  return (all || []).filter((m) => Number(m.user_id) === Number(userId));
+  try {
+    const res = await fetch(`/api/users/${userId}/medical`);
+    if (!res.ok) {
+      console.error(`Failed to fetch medical records: ${res.status}`);
+      return [];
+    }
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching medical records:", error);
+    return [];
+  }
 }

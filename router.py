@@ -1,4 +1,5 @@
-# router.py
+
+#router.py
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse
@@ -6,8 +7,6 @@ from urllib.parse import urlparse
 from core.static import serve_static
 from core.middleware import add_cors_headers
 from core.responses import send_404
-
-# -------- JOIN / REPORT controller --------
 from controllers.report import get_health_report
 
 # -------- USER controllers --------
@@ -41,12 +40,11 @@ from controllers.medical import (
 FRONTEND_ROUTES = {
     "/", "/home",
     "/users",
-    "/activities",   
+    "/activities",
     "/medical",
-    "/report"
+    "/reports",
     "/profile"
 }
-
 
 class Router(BaseHTTPRequestHandler):
 
@@ -61,15 +59,11 @@ class Router(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
 
-        # ===== FRONTEND (SPA) =====
-        if path in FRONTEND_ROUTES:
-            return serve_static(self, "frontend/pages/index.html")
-
-        if path.startswith("/frontend/"):
-            return serve_static(self, path.lstrip("/"))
-
-        if path.startswith("/assets/"):
-            return serve_static(self, "frontend" + path)
+        if path == "/favicon.ico":
+            return send_404(self)
+    # ---------- REPORT (JOIN API) ----------
+        if path == "/api/report":
+            return get_health_report(self)
 
         # ===== USERS API =====
         if path == "/api/users":
@@ -100,16 +94,20 @@ class Router(BaseHTTPRequestHandler):
                 return get_medical(self, int(path.split("/")[-1]))
             except ValueError:
                 return send_404(self)
+            
+                # # ===== FRONTEND (SPA) =====
+        if not path.startswith("/api") and "." not in path:
+            return serve_static(self, "frontend/pages/index.html")
 
-        # ===== REPORT API (JOIN) =====
-        if path == "/api/report":
-            return get_health_report(self)
 
+        if path.startswith("/frontend/"):
+            return serve_static(self, path.lstrip("/"))
         return send_404(self)
-    
 
+        
     # ---------------- POST ----------------
     def do_POST(self):
+
         if self.path == "/api/users":
             return create_user(self)
 
@@ -123,27 +121,53 @@ class Router(BaseHTTPRequestHandler):
 
     # ---------------- PUT ----------------
     def do_PUT(self):
+
         if self.path.startswith("/api/users/"):
-            return update_user(self, int(self.path.split("/")[-1]))
+            try:
+                user_id = int(self.path.split("/")[-1])
+                return update_user(self, user_id)
+            except ValueError:
+                return send_404(self)
 
         if self.path.startswith("/api/activities/"):
-            return update_activity(self, int(self.path.split("/")[-1]))
+            try:
+                activity_id = int(self.path.split("/")[-1])
+                return update_activity(self, activity_id)
+            except ValueError:
+                return send_404(self)
 
         if self.path.startswith("/api/medical/"):
-            return update_medical(self, int(self.path.split("/")[-1]))
+            try:
+                medical_id = int(self.path.split("/")[-1])
+                return update_medical(self, medical_id)
+            except ValueError:
+                return send_404(self)
 
         return send_404(self)
 
     # ---------------- DELETE ----------------
     def do_DELETE(self):
+
         if self.path.startswith("/api/users/"):
-            return delete_user(self)
+            try:
+                user_id = int(self.path.split("/")[-1])
+                return delete_user(self, user_id)
+            except ValueError:
+                return send_404(self)
 
         if self.path.startswith("/api/activities/"):
-            return delete_activity(self, int(self.path.split("/")[-1]))
+            try:
+                activity_id = int(self.path.split("/")[-1])
+                return delete_activity(self, activity_id)
+            except ValueError:
+                return send_404(self)
 
         if self.path.startswith("/api/medical/"):
-            return delete_medical(self, int(self.path.split("/")[-1]))
+            try:
+                medical_id = int(self.path.split("/")[-1])
+                return delete_medical(self, medical_id)
+            except ValueError:
+                return send_404(self)
 
         return send_404(self)
 
